@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--配置User类对象创建-->
+    <!--默认无参构造-->
+    <bean id="user" class="com.qujia.spring5.User"></bean>
+    <!--id：对象的唯一标识
+        class：类全路径（包类路径）
+        name：也是对象的标识，区别是可以加特殊符号（一般不用）
+    -->
+
+    <!--set方法注入属性-->
+    <bean id="book" class="com.qujia.spring5.Book">
+        <property name="bauthor" value="作者"></property>
+        <property name="bname" value="书名"></property>
+        <!--用null标签设空值-->
+        <!--<property name="address">
+            <null/>
+        </property>-->
+
+        <!--属性值有特殊符号-->
+        <!--把特殊符号转义 例如&lt;-->
+        <!--将带特殊符号的内容写到CDATA-->
+        <property name="address" >
+            <value><![CDATA[《南京》]]></value>
+        </property>
+    </bean>
+        <!--p名称空间注入：简化基于xml配置方式（set注入）-->
+            <!--1.添加p名称空间在配置文件中-->
+            <!--2.在bean标签里进行属性注入-->
+            <!--<bean id="book" class="com.qujia.spring5.Book" p:name="bookName" p:bauthor="bookAuthor"></bean>-->
+
+
+    <!--有参构造注入属性-->
+    <bean id="orders" class="com.qujia.spring5.Orders">
+        <constructor-arg name="oname" value="abc"></constructor-arg>
+        <constructor-arg name="address" value="沈阳"></constructor-arg>
+        <!--
+            index标签表示类中的第几个参数
+            <constructor-arg index="0" value="123"></constructor-arg>
+        -->
+    </bean>
+
+</beans>
