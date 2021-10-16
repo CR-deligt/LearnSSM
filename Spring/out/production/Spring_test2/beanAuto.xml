@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="dept" class="com.qujia.Spring.autowrie.Dept"></bean>
+    <!--手动装配-->
+    <!--<bean id="emp" class="com.qujia.Spring.autowrie.Emp">
+        <property name="dept" ref="dept"></property>
+    </bean>-->
+    <!--自动装配-->
+    <!--
+        属性：autowrie
+        byName：通过属性名注入  bean的id要和类中set属性名称一样
+        byType：根据属性类型注入     根据类型找到相应的bean（对应bean如果有两个就会报错）
+    -->
+    <bean id="emp" class="com.qujia.Spring.autowrie.Emp" autowire="byName"></bean>
+</beans>

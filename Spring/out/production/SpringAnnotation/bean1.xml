@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--开启组件扫描-->
+    <!--扫描多个包用逗号隔开
+        扫描包的上层目录-->
+                    <!--!!!Spring5不支持java16!!!
+                    Failed to read candidate component class
+                         降低编译环境为15可以正常运行!!!-->
+    <context:component-scan base-package="com.qujia.Spring"></context:component-scan>
+    <!--<bean id="userService" class="com.qujia.Spring.service.UserService"></bean>-->
+
+    <!--示例一：
+        use-default-filters=“false”: 不使用默认filter（即不全部扫描）
+        context:include-filter：设置扫描哪些内容
+                                这里是只扫描Controller
+    -->
+    <!--<context:component-scan base-package="com.qujia.Spring" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>-->
+    <!--不加use-default-filters，全扫描
+            context:exclude-filter:设置哪些内容不进行扫描-->
+    <!--<context:component-scan base-package="com.qujia.Spring" >
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>-->
+</beans>

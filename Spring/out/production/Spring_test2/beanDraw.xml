@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <!--用util标签完成list集合注入-->
+    <!--先引入一个内部空间-->
+    <!--提取list使其能被多个类调用-->
+    <util:list id="bookList">
+        <!--<ref bean=""></ref>集合类型是对象-->
+        <value>AAA</value>
+        <value>BBB</value>
+        <value>CCC</value>
+    </util:list>
+    <!--scope属性设置
+            singleton单实例    加载时创建对象
+                或
+            prototype多实例    加载getBean()的时候创建多实例对象
+
+            request session
+     -->
+    <bean id="book" class="com.qujia.Spring.collectiontype.Book" scope="prototype">
+        <property name="list" ref="bookList"></property>
+    </bean>
+
+
+
+</beans>

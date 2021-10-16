@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--集合类型属性注入-->
+    <bean id="stu" class="com.qujia.Spring.collectiontype.Stu">
+        <!--数组类型属性注入-->
+        <property name="courses">
+            <array>
+                <value>语文</value>
+                <value>数学</value>
+                <value>英语</value>
+            </array>
+        </property>
+        <!--list类型属性注入-->
+        <property name="list">
+            <list>
+                <value>AAA</value>
+                <value>BBB</value>
+            </list>
+        </property>
+        <property name="courseList"><!--list的集合类型是对象-->
+            <list>
+                <ref bean="course1"></ref>
+                <ref bean="course2"></ref>
+                <ref bean="course3"></ref>
+            </list>
+        </property>
+        <!--Map类型属性注入-->
+        <property name="map">
+            <map>
+                <entry key="JAVA" value="java"></entry>
+                <entry key="C" value="c"></entry>
+            </map>
+        </property>
+        <!--set类型属性注入-->
+        <property name="sets">
+            <set>
+                <value>AAA</value>
+                <value>BBB</value>
+            </set>
+        </property>
+    </bean>
+    <!--创建多个course对象-->
+    <bean id="course1" class="com.qujia.Spring.collectiontype.Course">
+        <property name="cname" value="Spring5"></property>
+    </bean>
+    <bean id="course2" class="com.qujia.Spring.collectiontype.Course">
+        <property name="cname" value="Java"></property>
+    </bean>
+    <bean id="course3" class="com.qujia.Spring.collectiontype.Course">
+        <property name="cname" value="Web"></property>
+    </bean>
+
+</beans>

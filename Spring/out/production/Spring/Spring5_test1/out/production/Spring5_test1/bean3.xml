@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--内部bean-->
+    <bean id="emp" class="com.qujia.spring5.bean.Emp">
+        <!--普通属性-->
+        <property name="ename" value="lucy"></property>
+        <property name="gender" value="女"></property>
+        <!--设置对象属性-->
+        <!--外部bean<property name="dept" ref="dept"></property>-->
+        <!--内部bean-->
+        <property name="dept">
+            <bean id="dept" class="com.qujia.spring5.bean.Dept">
+                <property name="dname" value="学习部"></property>
+            </bean>
+        </property>
+    </bean>
+    <!--外部bean<bean id="dept" class="com.qujia.spring5.bean.Dept"></bean>-->
+</beans>
