@@ -1,0 +1,28 @@
+用AspectJ注解进行AOP操作
+1.创建普通类（要被增强的）
+2.创建增强类
+    1).创建不同方法表示不同的通知
+3.进行通知的配置（xml）
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+    1).在Spring配置文件开启注解扫描
+        <context:component-scan base-package="com.qujia.Spring.aopanno"></context:component-scan>
+    2).用注解创建对象（在两个类前加注解）
+    3).在增强类上加注解@Aspect
+    4).在Spring配置文件开启生成代理对象//找注解，有Aspect生成代理对象
+        <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+4.配置不同类型通知
+    1).在增强类作为通知的方法上加注释，并使用切入点表达式 e.g. execution(* com.qujia.Spring.aopanno.User.add(..))
+        @Before
+        @AfterReturning
+        @After
+        @Around
+        @AfterThrowing
+5.公共切入点抽取@Pointcut
+    @Pointcut(value = "execution(* com.qujia.Spring.aopanno.User.add(..))")
+    public void pointdemo(){}
+
+    @Before(value = "pointdemo()")
+6.多个增强类对同一方法增强，可设置优先级
+    在增强类上加注解@Order（数字），数字越小，优先级越高
+7.也可以完全使用注解
