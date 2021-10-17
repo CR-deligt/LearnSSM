@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.qujia.Spring"></context:component-scan>
+    <!-- 配置连接池 -->
+    <!-- DruidDataSource dataSource = new DruidDataSource(); -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <!-- dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+            set方法注入
+        -->
+        <!-- 获取properties文件内容，根据key获取，使用spring表达式获取 -->
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql:///user_db?serverTimezone=UTC"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="2001927"></property>
+    </bean>
+    <!--创建JdbcTemplate对象-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <!--注入dataSource-->
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+</beans>
