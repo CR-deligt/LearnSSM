@@ -41,7 +41,7 @@ public class UserService {
 //        }
 
             userDao.ReduceMoney();
-            //int i = 10/0;
+            int i = 10/0;
             userDao.AddMoney();
     }
 }
