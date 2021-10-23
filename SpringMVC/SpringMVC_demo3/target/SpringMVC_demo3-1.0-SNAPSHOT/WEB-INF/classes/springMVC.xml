@@ -33,6 +33,8 @@
     </bean>
     <!--视图控制器   控制器只有一个映射关系且仅用于实现页面跳转使用，其他所有控制器全部失效（没开注解驱动）-->
     <mvc:view-controller path="/" view-name="index"></mvc:view-controller>
+    <mvc:view-controller path="/test_view" view-name="test_view"></mvc:view-controller>
+    <mvc:view-controller path="/test_rest" view-name="test_rest"></mvc:view-controller>
     <!--开启mvc注解驱动-->
     <mvc:annotation-driven/>
 </beans>
