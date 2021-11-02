@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qujia.dao.StudentDao">
+    <!--
+     parameterType ： dao接口中方法参数的数据类型。
+       parameterType它的值是java的数据类型全限定名称或者是mybatis定义的别名
+       例如：parameterType="java.lang.Integer"
+            parameterType="int"
+
+       注意：parameterType不是强制的，mybatis通过反射机制能够发现接口参数的数类型。
+       所以可以没有。 一般我们也不写。
+   -->
+    <!--<select id="selectStudentById" resultType="com.qujia.domain.Student" >-->
+    <select id="selectStudentById" resultType="stu" >/*在著配置文件定义别名*/
+        select id,name,email,age from student where id=#{id}
+    </select>
+    <select id="selectMultiParam" resultType="com.qujia.domain.Student">
+        select id,name,email,age from student where name=#{myname} or age = #{myage}
+    </select>
+    <!--<select id="selectStudentReturnViewStudent" resultType="com.qujia.vo.ViewStudent">-->
+    <select id="selectStudentReturnViewStudent" resultType="ViewStudent">
+        select id,name from student where id=#{id}
+    </select>
+    <!--resultType返回值类型：全限定名称或者别名（前者优先）-->
+    <select id="countStudent" resultType="int">
+        select count(*) from student
+    </select>
+    <select id="selectMapId" resultType="java.util.HashMap">
+        select id,name from student where id=#{id}
+    </select>
+
+    <!--resultMap-->
+    <resultMap id="studentMap" type="com.qujia.domain.Student">
+        <!--column:select返回的列名  property:Java属性名  主键用id非主键用result-->
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="email" property="email"></result>
+        <result column="age" property="age"></result>
+    </resultMap>
+    <select id="selectAllStudents" resultMap="studentMap">
+        select * from student
+    </select>
+    <!--列名属性名不同的第二种方法:列别名（as属性名）（第一种resultMap映射）-->
+    <select id="selectDiffColProperty" resultType="com.qujia.domain.MyStudent">
+        select id as stuid,name as stuname,email as stuemail,age as stuage  from student
+    </select>
+
+    <select id="selectLikeOne" resultType="com.qujia.domain.Student">
+        select id,name,email,age from student where name like #{name}
+    </select>
+    <select id="selectLikeTwo" resultType="com.qujia.domain.Student">
+        select id,name,email,age from student where name like  "%"#{name}"%"
+    </select>
+
+</mapper>
