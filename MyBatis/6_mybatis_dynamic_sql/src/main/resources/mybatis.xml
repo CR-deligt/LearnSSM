@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--主配置文件，定义数据库配置信息，sql映射位置-->
+<configuration>
+    <!--指定properties文件的位置-->
+    <properties resource="jdbc.properties"></properties>
+    <!--控制MyBatis全局行为-->
+    <settings>
+        <!--输出日志到控制台-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <!--定义别名-->
+    <typeAliases>
+
+        <typeAlias type="com.qujia.domain.Student" alias="stu"></typeAlias>
+
+        <package name="com.qujia.vo"/><!--包内所有的类名就是别名-->
+    </typeAliases>
+
+    <!--配置插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor" />
+    </plugins>
+
+    <!--配置 mybatis 环境-->
+    <environments default="mysql">
+        <!--id:数据源的名称-->
+        <environment id="mysql">
+            <!--配置事务类型：使用 JDBC 事务（使用 Connection 的提交和回滚）-->
+            <transactionManager type="JDBC"/>
+            <!--数据源 dataSource：创建数据库 Connection 对象
+            type: POOLED 使用数据库的连接池
+            -->
+            <!--<dataSource type="POOLED">
+                &lt;!&ndash;连接数据库的四个要素&ndash;&gt;
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>&lt;!&ndash;高版本加cj&ndash;&gt;
+                <property name="url" value="jdbc:mysql://localhost:3306/springdb?useSSL=false&amp;serverTimezone=UTC"/>
+                <property name="username" value="root"/>
+                <property name="password" value="2001927"/>
+            </dataSource>-->
+            <dataSource type="POOLED">
+                <!--连接数据库的四个要素-->
+                <property name="driver" value="${jdbc.driver}"/><!--高版本加cj-->
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.user}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--告诉 mybatis 要执行的 sql 语句的位置-->
+        <!--第一种方式：指定多个mapper文件-->
+        <!--<mapper resource="com/qujia/dao/StudentDao.xml"/>
+        <mapper resource="com/qujia/dao/OrderDao.xml"/>-->
+        <!--第二种方式： 使用包名
+            name: xml文件（mapper文件）所在的包名, 这个包中所有xml文件一次都能加载给mybatis
+            使用package的要求：
+             1. mapper文件名称需要和接口名称一样， 区分大小写的一样
+             2. mapper文件和dao接口需要在同一目录
+        -->
+        <package name="com.qujia.dao"/>
+        <!-- <package name="com.bjpowernode.dao2"/>
+         <package name="com.bjpowernode.dao3"/>-->
+    </mappers>
+</configuration>
+
